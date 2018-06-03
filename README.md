@@ -1,37 +1,26 @@
-## Welcome to GitHub Pages
+## Sample Size Calculator for A/B Tests
 
-You can use the [editor on GitHub](https://github.com/santhoshhari/sample-size-calculator/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
+Power analysis and sample size calculations are key to drawing valid conclusion from any A/B test. These address the concerns around identifying number of units required in each condition (control and treatment) of the experiment. Theoretically it is easy to consider large number of samples in experiments but in practical cases it is expensive (time spent, lost revenue, customers, etc.). This makes sample size calculations key to the the entire experimentation process.
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+In this repository, we have developed functions to compute sample sizes for tests involving comparison of means or comparison of proportions. The functions are flexible enough to handle multiple testing conditions like one/two-sided tests, can take in range of power/significance level/effect size. An interactive version of these functions is availavle [here](https://github.com/santhoshhari/sample-size-calculator).
 
-### Markdown
+### Formula for computing sample size
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+**Nomenclature:**
+- <img src="https://latex.codecogs.com/gif.latex?n_1" title="n_1" />: Number of samples in control group
+- <img src="https://latex.codecogs.com/gif.latex?n_2" title="n_2" />: Number of samples in treatment group
+- <img src="https://latex.codecogs.com/gif.latex?\delta" title="\delta" />: Effect Size in terms of standard deviation (<img src="https://latex.codecogs.com/gif.latex?\sigma" title="\sigma" />)
+- <img src="https://latex.codecogs.com/gif.latex?k:n_1/n_2" title="k=n_1/n_2" />
+- <img src="https://latex.codecogs.com/gif.latex?z_{\alpha/2}" title="z_{\alpha/2}" />: Z-Score corresponding to the probability of incorrectly rejecting null hypothesis
+- <img src="https://latex.codecogs.com/gif.latex?z_{1-\beta}" title="z_{1-\beta}" />: Z-Score corresponding to the propability of correctly rejecting null hypothesis
+- <img src="https://latex.codecogs.com/gif.latex?\pi_1" title="\pi_1" />: Proportion of success (ex - click through rate) in control group (already known)
+- <img src="https://latex.codecogs.com/gif.latex?\pi_2" title="\pi_2" />: Proportion of success in treatment group (estimated)
 
-```markdown
-Syntax highlighted code block
 
-# Header 1
-## Header 2
-### Header 3
+**Sample size for comparison of means:**
 
-- Bulleted
-- List
+<img src="https://latex.codecogs.com/gif.latex?n_2&space;=&space;(1/k&space;&plus;&space;1)(z_{\alpha/2}&space;-&space;z_{1-\beta})^2/\delta^2" title="x" />
 
-1. Numbered
-2. List
+**Sample size for comparison of proportions:**
 
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
-
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/santhoshhari/sample-size-calculator/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+<img src="https://latex.codecogs.com/gif.latex?n_2&space;=&space;(z_{\alpha/2}-z_{1-\beta})^2&space;[\pi_1(1-\pi_1)/k&space;&plus;&space;\pi_2(1-\pi_2)]/\delta^2" title="n_2 = (z_{\alpha/2}-z_{1-\beta})^2 [\pi_1(1-\pi_1)/k + \pi_2(1-\pi_2)]/\delta^2" />
