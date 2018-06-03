@@ -57,9 +57,9 @@ def plot_sample_size(sample_size, alpha=[0.05, 0.1], power=0.8, k=1):
 
 def wrap_calculations(test_type='prop',
                       tailed='one',
-                      alpha=[0.05],
-                      power=[0.8],
-                      effect_size=[0.5],
+                      alpha=[0.05, 0.05],
+                      power=[0.8, 0.8],
+                      effect_size=[0.5, 0.5],
                       k=1):
     """
     Function to communicate with frontend.
@@ -81,9 +81,9 @@ def wrap_calculations(test_type='prop',
         Appropriate data and layout objects for plotting
     """
     if test_type == 'prop':
-        alpha_val = alpha[0] if len(alpha) == 1 else alpha
-        power_val = power[0] if len(power) == 1 else power
-        if len(effect_size) == 2:
+        alpha_val = alpha[0] if alpha[0] == alpha[1] else alpha
+        power_val = power[0] if power[0] == power[2] else power
+        if effect_size[0] != effect_size[1]:
             pi1 = effect_size[0]
             pi2 = effect_size[1]
         else:
