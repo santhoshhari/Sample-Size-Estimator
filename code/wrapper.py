@@ -1,8 +1,9 @@
 import plotly.graph_objs as go
 from proportions import *
+from means import *
 
 
-def plot_sample_size(sample_size, alpha=[0.05, 0.1], power=0.8, k=1):
+def plot_sample_size(sample_size, alpha=[0.05, 0.1], power=0.8, effect_size=None, k=1):
     """
     Function to return plotly data and layout objects
 
@@ -49,7 +50,7 @@ def plot_sample_size(sample_size, alpha=[0.05, 0.1], power=0.8, k=1):
                 go.Scatter(x=[alpha], y=[sample_size[1]], name='Treatment'))
         layout = go.Layout(
             title=f'Sample Size with significance level={alpha} and' +
-            ' power={power}',
+            f' power={power}',
             font=dict(family='Balto'))
 
     return dict(data=data, layout=layout)
@@ -80,9 +81,9 @@ def wrap_calculations(test_type='prop',
     :return:
         Appropriate data and layout objects for plotting
     """
+    alpha_val = alpha[0] if alpha[0] == alpha[1] else alpha
+    power_val = power[0] if power[0] == power[1] else power
     if test_type == 'prop':
-        alpha_val = alpha[0] if alpha[0] == alpha[1] else alpha
-        power_val = power[0] if power[0] == power[1] else power
         if effect_size[0] != effect_size[1]:
             pi1 = effect_size[0]
             pi2 = effect_size[1]
@@ -97,7 +98,14 @@ def wrap_calculations(test_type='prop',
             one_sided=tailed == 'one')
         return plot_sample_size(sample_size, alpha_val, power_val, k)
     elif test_type == 'mean':
-        return None
+        effect_size_val = effect_size[0] if effect_size[0] == effect_size[1] else effect_size
+        sample_size = sample_size_t(
+            alpha=alpha_val,
+            power=power_val,
+            effect_size=effect_size_val,
+            k=k,
+            one_sided=tailed == 'one')
+        return plot_sample_size(sample_size, alpha_val, power_val, k)
     else:
         return None
 

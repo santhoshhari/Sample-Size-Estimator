@@ -1,12 +1,14 @@
 ## Sample Size Calculator for A/B Tests
 
-Power analysis and sample size calculations are key to drawing valid conclusion from any A/B test. These address the concerns around identifying number of units required in each condition (control and treatment) of the experiment. Theoretically it is easy to consider large number of samples in experiments but in practical cases it is expensive (time spent, lost revenue, customers, etc.). This makes sample size calculations key to the the entire experimentation process.
+Power analysis and sample size calculations are key to drawing valid conclusion from any A/B test. These address the concerns around identifying number of units required in each condition (control and treatment) of the experiment. Theoretically it is easy to consider large number of samples in experiments but in practice it is expensive (time spent, lost revenue, lost customers, etc.). This makes sample size calculations key to the the entire experimentation process.
 
-In this repository, we have developed functions to compute sample sizes for tests involving comparison of means or comparison of proportions. The functions are flexible enough to handle multiple testing conditions like one/two-sided tests, can take in range of power/significance level/effect size. An interactive version of these functions is availavle [here](https://github.com/santhoshhari/sample-size-calculator).
+In this repository, we have developed functions to compute sample sizes for tests involving comparison of means and comparison of proportions. The functions are flexible enough to handle multiple testing conditions like one/two-sided tests, can take in range of power/significance level/effect size. An interactive version of these functions is built as a dash version and can be launche by running the sample_size_dash_app.py file (under code folder). Please install all requirements using following command before launching the app.
+
+`pip install -r requirements.txt`
 
 ### Formula for computing sample size
 
-**Nomenclature:**
+**Variable Description:**
 - <img src="https://latex.codecogs.com/gif.latex?n_1" title="n_1" />: Number of samples in control group
 - <img src="https://latex.codecogs.com/gif.latex?n_2" title="n_2" />: Number of samples in treatment group
 - <img src="https://latex.codecogs.com/gif.latex?\delta" title="\delta" />: Effect Size in terms of standard deviation (<img src="https://latex.codecogs.com/gif.latex?\sigma" title="\sigma" />)

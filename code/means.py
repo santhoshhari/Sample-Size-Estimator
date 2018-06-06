@@ -2,26 +2,26 @@ import scipy.stats as sc
 import numpy as np
 
 
-def get_power_double_side(alpha, n, k, delta):
+def get_power_double_side(alpha, n, k, effect_size):
     """
     Gives the power of a two tailed t-test
     For more info http://faculty.washington.edu/fscholz/DATAFILES498B2008/NoncentralT.pdf
     :return: power
     """
     c = sc.t.ppf(1 - alpha / 2, (1 + k) * n - 2)
-    delta_norm = delta * np.sqrt(1 / (1 / n + 1 / (n * k)))
+    delta_norm = effect_size * np.sqrt(1 / (1 / n + 1 / (n * k)))
     p = 1 - sc.nct.cdf(c, (1 + k) * n - 2, delta_norm) + sc.nct.cdf(-c, (1 + k) * n - 2, delta_norm)
     return p
 
 
-def get_power_one_side(alpha, n, k, delta):
+def get_power_one_side(alpha, n, k, effect_size):
     """
     Gives the power of a one tailed t-test
     For more info http://faculty.washington.edu/fscholz/DATAFILES498B2008/NoncentralT.pdf
     :return: power
     """
     c = sc.t.ppf(1 - alpha, (1 + k) * n - 2)
-    delta_norm = delta * np.sqrt(1 / (1 / n + 1 / (n * k)))
+    delta_norm = effect_size * np.sqrt(1 / (1 / n + 1 / (n * k)))
     p = 1 - sc.nct.cdf(c, (1 + k) * n - 2, delta_norm)
     return p
 
@@ -41,7 +41,7 @@ def sample_size_t_sub(alpha=0.05, power=0.8, k=1, delta=1, one_sided=False):
             return i
 
 
-def sample_size_t(alpha=0.05, power=0.8, k=1, delta=1, one_sided=False):
+def sample_size_t(alpha=0.05, power=0.8, k=1, effect_size=1, one_sided=False):
     """
     Function to compute sample size for A/B test given
     the attributes of the test such as
@@ -54,7 +54,7 @@ def sample_size_t(alpha=0.05, power=0.8, k=1, delta=1, one_sided=False):
     :param power: Power of the test
     :param k: Proportion of # of samples in control to treatment
     :param one_sided: Flag to indicate if the test is one-sided
-    :param delta : normalized effect size(∂/Standard Deviation)
+    :param effect_size : normalized effect size(∂/Standard Deviation)
 
     :return:
         Sample size as float if k=1 and alpha/power are floats.
@@ -73,7 +73,7 @@ def sample_size_t(alpha=0.05, power=0.8, k=1, delta=1, one_sided=False):
             )
         sample_sizes = []
         for one_alpha in alpha_range:
-            s_size = sample_size_t_sub(one_alpha, power, k, delta, one_sided)
+            s_size = sample_size_t_sub(one_alpha, power, k, effect_size, one_sided)
             sample_sizes.append(s_size)
         return sample_sizes
 
@@ -85,11 +85,11 @@ def sample_size_t(alpha=0.05, power=0.8, k=1, delta=1, one_sided=False):
             )
         sample_sizes = []
         for one_pow in power_range:
-            s_size = sample_size_t_sub(alpha, one_pow, k, delta, one_sided)
+            s_size = sample_size_t_sub(alpha, one_pow, k, effect_size, one_sided)
             sample_sizes.append(s_size)
         return sample_sizes
     elif type(power) != list and type(alpha) != list:
-        return sample_size_t_sub(alpha, power, k, delta, one_sided)
+        return sample_size_t_sub(alpha, power, k, effect_size, one_sided)
     else:
         raise Exception(
             "Range can be submitted only for one of power/significance level"

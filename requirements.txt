@@ -1,0 +1,12 @@
+numpy==1.14.0
+scipy==1.0.0
+plotly==2.5.1
+dash==0.21.1
+dash-core-components==0.23.0
+dash-html-components==0.11.0
+dash-renderer==0.13.0
+dask==0.17.2
+pandas==0.22.0
+Flask==0.12.2
+Flask-Cors==3.0.4
+
