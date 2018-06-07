@@ -92,7 +92,7 @@ def wrap_calculations(test_type='prop',
                       alpha=[0.05, 0.05],
                       power=[0.8, 0.8],
                       effect_size=[0.5, 0.5],
-                      k=1):
+                      k=[1,1]):
     """
     Function to communicate with frontend.
     Takes inputs from dash and returns plotly objects
@@ -115,6 +115,7 @@ def wrap_calculations(test_type='prop',
     alpha_val = alpha[0] if alpha[0] == alpha[1] else alpha
     power_val = power[0] if power[0] == power[1] else power
     effect_size_val = effect_size[0] if effect_size[0] == effect_size[1] else effect_size
+    k_val = k[0]
     if test_type == 'prop':
         if effect_size[0] != effect_size[1]:
             pi1 = effect_size[0]
@@ -126,17 +127,17 @@ def wrap_calculations(test_type='prop',
             pi2,
             alpha=alpha_val,
             power=power_val,
-            k=k,
+            k=k_val,
             one_sided=tailed == 'one')
-        return plot_sample_size(sample_size, alpha_val, power_val, k)
+        return plot_sample_size(samsample_size, alpha_val, power_val, k=k)
     elif test_type == 'mean':
         sample_size = sample_size_t(
             alpha=alpha_val,
             power=power_val,
             effect_size=effect_size_val,
-            k=k,
+            k=k_val,
             one_sided=tailed == 'one')
-        return plot_sample_size(sample_size, alpha_val, power_val, k)
+        return plot_sample_size(sample_size, alpha_val, power_val, effect_size_val, k)
     else:
         return None
 
