@@ -8,7 +8,7 @@ from flask_cors import CORS
 import os
 
 import sys
-sys.path.append('../sample-size-calculator/code/')
+sys.path.append('code/')
 from wrapper import *
 
 app = dash.Dash('Sample_size_calculator')
