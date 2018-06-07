@@ -6,10 +6,10 @@ import pandas as pd
 import flask
 from flask_cors import CORS
 import os
-from wrapper import *
+
 import sys
 sys.path.append('../sample-size-calculator/code/')
-
+from wrapper import *
 
 app = dash.Dash('Sample_size_calculator')
 server = app.server
