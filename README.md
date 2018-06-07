@@ -1,10 +1,15 @@
 ## Sample Size Calculator for A/B Tests
 
+### Contributors: Sri Santhosh Hari, Sooraj Subrahmannian, Devesh Maheshwari
+### URL of the APP: https://sscalc.herokuapp.com/
+
 Power analysis and sample size calculations are key to drawing valid conclusion from any A/B test. These address the concerns around identifying number of units required in each condition (control and treatment) of the experiment. Theoretically it is easy to consider large number of samples in experiments but in practice it is expensive (time spent, lost revenue, lost customers, etc.). This makes sample size calculations key to the the entire experimentation process.
 
-In this repository, we have developed functions to compute sample sizes for tests involving comparison of means and comparison of proportions. The functions are flexible enough to handle multiple testing conditions like one/two-sided tests, can take in range of power/significance level/effect size. An interactive version of these functions is built as a dash version and can be launche by running the sample_size_dash_app.py file (under code folder). Please install all requirements using following command before launching the app.
+In this repository, we have developed functions to compute sample sizes for tests involving comparison of means and comparison of proportions. The functions are flexible enough to handle multiple testing conditions like one/two-sided tests, can take in range of power/significance level/effect size. An interactive version of these functions can be viewed as a dash app version. Local version of the app can be launched by executing the following steps
 
 `pip install -r requirements.txt`
+`python sample_size_calculator.py`
+Open http://0.0.0.0:8055/ in a browser.
 
 ### Formula for computing sample size
 

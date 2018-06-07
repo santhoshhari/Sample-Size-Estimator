@@ -167,4 +167,4 @@ for css in external_css:
 
 
 if __name__ == '__main__':
-    app.run_server(port=8052,debug=True,host='0.0.0.0')
+    app.run_server(port=8055, host='0.0.0.0')
