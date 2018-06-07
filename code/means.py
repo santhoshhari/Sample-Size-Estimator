@@ -26,17 +26,17 @@ def get_power_one_side(alpha, n, k, effect_size):
     return p
 
 
-def sample_size_t_sub(alpha=0.05, power=0.8, k=1, delta=1, one_sided=False):
+def sample_size_t_sub(alpha=0.05, power=0.8, k=1, effect_size=1, one_sided=False):
     """
     Returns the sample size at which power is greater than what is required
     :return: power
     """
     # Calculate the critical point
-    for i in range(2, 100):
+    for i in range(2, 5000):
         if one_sided:
-            p = get_power_one_side(alpha, i, k, delta)
+            p = get_power_one_side(alpha, i, k, effect_size)
         else:
-            p = get_power_double_side(alpha, i, k, delta)
+            p = get_power_double_side(alpha, i, k, effect_size)
         if p > power:
             return i
 
@@ -75,7 +75,7 @@ def sample_size_t(alpha=0.05, power=0.8, k=1, effect_size=1, one_sided=False):
         for one_alpha in alpha_range:
             s_size = sample_size_t_sub(one_alpha, power, k, effect_size, one_sided)
             sample_sizes.append(s_size)
-        return sample_sizes
+        n2 = sample_sizes
 
     elif isinstance(power, list) and not(isinstance(alpha, list) or isinstance(effect_size, list)):
         power_range = np.linspace(power[0], power[1], 20)
@@ -87,7 +87,7 @@ def sample_size_t(alpha=0.05, power=0.8, k=1, effect_size=1, one_sided=False):
         for one_pow in power_range:
             s_size = sample_size_t_sub(alpha, one_pow, k, effect_size, one_sided)
             sample_sizes.append(s_size)
-        return sample_sizes
+        n2 = sample_sizes
     elif isinstance(effect_size, list) and not(isinstance(alpha, list) or isinstance(power, list)):
         effect_size_range = np.linspace(effect_size[0], effect_size[1], 20)
         if 0 in effect_size:
@@ -98,13 +98,19 @@ def sample_size_t(alpha=0.05, power=0.8, k=1, effect_size=1, one_sided=False):
         for one_es in effect_size_range:
             s_size = sample_size_t_sub(alpha, power, k, one_es, one_sided)
             sample_sizes.append(s_size)
-        return sample_sizes
-    elif not(isinstance(alpha, list) or isinstance(power, list) or isinstance(effect_size, list)):
-        return sample_size_t_sub(alpha, power, k, effect_size, one_sided)
+        n2 = sample_sizes
+    elif not(isinstance(alpha, list)) and not(isinstance(power, list)) and not(isinstance(effect_size, list)):
+        n2 = sample_size_t_sub(alpha, power, k, effect_size, one_sided)
     else:
         raise Exception(
             "Range can be submitted only for one of power/significance level/effect_size"
         )
+    
+    n2 = np.array(n2)
+    if k == 1:
+        return np.ceil(n2)
+    else:
+        return (np.ceil(k * n2), np.ceil(n2))
 
 
 if __name__=='__main__':

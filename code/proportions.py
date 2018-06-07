@@ -48,6 +48,7 @@ def sample_size_z(pi1, pi2, alpha=0.05, power=0.8, k=1, one_sided=False):
     n2 = np.square(z_diff / effect_size) * (pi1 * (1 - pi1) / k + pi2 *
                                             (1 - pi2))
 
+    n2 = np.array(n2)
     if k == 1:
         return np.ceil(n2)
     else:
