@@ -27,13 +27,13 @@ def sample_size_z(pi1, pi2, alpha=0.05, power=0.8, k=1, one_sided=False):
             one of alpha/power is lists.
     """
     effect_size = np.abs(pi2 - pi1)
-    if type(alpha) == list and type(power) != list:
+    if isinstance(alpha, list) and not(isinstance(power, list)):
         alpha_range = np.linspace(alpha[0], alpha[1], 20)
         power_range = power
-    elif type(power) == list and type(alpha) != list:
+    elif isinstance(power, list) and not(isinstance(alpha, list)):
         alpha_range = alpha
         power_range = np.linspace(power[0], power[1], 20)
-    elif type(power) != list and type(alpha) != list:
+    elif not(isinstance(power, list)) and not(isinstance(alpha, list)):
         alpha_range = alpha
         power_range = power
     else:
@@ -52,8 +52,6 @@ def sample_size_z(pi1, pi2, alpha=0.05, power=0.8, k=1, one_sided=False):
         return np.ceil(n2)
     else:
         return (np.ceil(k * n2), np.ceil(n2))
-
-
 
 
 if __name__ == '__main__':

@@ -65,7 +65,7 @@ def sample_size_t(alpha=0.05, power=0.8, k=1, effect_size=1, one_sided=False):
         Tuple of numpy arrays of size 20 each (control, treatment if k!=1) and
             one of alpha/power is lists.
     """
-    if type(alpha) == list and type(power) != list:
+    if isinstance(alpha, list) and not(isinstance(power, list) or isinstance(effect_size, list)):
         alpha_range = np.linspace(alpha[0], alpha[1], 20)
         if 0 in alpha:
             raise Exception(
@@ -77,7 +77,7 @@ def sample_size_t(alpha=0.05, power=0.8, k=1, effect_size=1, one_sided=False):
             sample_sizes.append(s_size)
         return sample_sizes
 
-    elif type(power) == list and type(alpha) != list:
+    elif isinstance(power, list) and not(isinstance(alpha, list) or isinstance(effect_size, list)):
         power_range = np.linspace(power[0], power[1], 20)
         if 1 in power:
             raise Exception(
@@ -88,9 +88,24 @@ def sample_size_t(alpha=0.05, power=0.8, k=1, effect_size=1, one_sided=False):
             s_size = sample_size_t_sub(alpha, one_pow, k, effect_size, one_sided)
             sample_sizes.append(s_size)
         return sample_sizes
-    elif type(power) != list and type(alpha) != list:
+    elif isinstance(effect_size, list) and not(isinstance(alpha, list) or isinstance(power, list)):
+        effect_size_range = np.linspace(effect_size[0], effect_size[1], 20)
+        if 0 in effect_size:
+            raise Exception(
+                "Effect Size can't be Zero"
+            )
+        sample_sizes = []
+        for one_es in effect_size_range:
+            s_size = sample_size_t_sub(alpha, power, k, one_es, one_sided)
+            sample_sizes.append(s_size)
+        return sample_sizes
+    elif not(isinstance(alpha, list) or isinstance(power, list) or isinstance(effect_size, list)):
         return sample_size_t_sub(alpha, power, k, effect_size, one_sided)
     else:
         raise Exception(
-            "Range can be submitted only for one of power/significance level"
+            "Range can be submitted only for one of power/significance level/effect_size"
         )
+
+
+if __name__=='__main__':
+    main()
