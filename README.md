@@ -8,7 +8,9 @@ Power analysis and sample size calculations are key to drawing valid conclusion 
 In this repository, we have developed functions to compute sample sizes for tests involving comparison of means and comparison of proportions. The functions are flexible enough to handle multiple testing conditions like one/two-sided tests, can take in range of power/significance level/effect size. An interactive version of these functions can be viewed as a dash app version. Local version of the app can be launched by executing the following steps
 
 `pip install -r requirements.txt`
+
 `python sample_size_calculator.py`
+
 Open http://0.0.0.0:8055/ in a browser.
 
 ### Formula for computing sample size
