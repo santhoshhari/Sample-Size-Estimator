@@ -1,1 +1,18 @@
-theme: jekyll-theme-architect
+# Site settings
+
+email: santhosh.sri8@gmail.com
+author: Sri Santhosh Hari, Sooraj Subrahmanian, Devesh Maheshwari
+description: "An interactive and intuitive UI to compute sample size in A/B Testing."
+baseurl: ""
+url: "https://santhoshhari.github.io/"
+
+# Build settings
+markdown:     kramdown
+kramdown:
+  input: GFM
+  hard_wrap: false
+  extensions: ['smart', 'tables', 'with_toc_data', "highlight"]
+permalink:    pretty
+paginate:     5
+sass:
+  compressed: true
