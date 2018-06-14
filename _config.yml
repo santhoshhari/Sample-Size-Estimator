@@ -5,6 +5,7 @@ author: Sri Santhosh Hari, Sooraj Subrahmanian, Devesh Maheshwari
 description: "An interactive and intuitive UI to compute sample size in A/B Testing."
 baseurl: ""
 url: "https://santhoshhari.github.io/"
+title: Sample Size Calculator"
 
 # Build settings
 markdown:     kramdown
