@@ -9,7 +9,7 @@ dask==0.17.2
 decorator==4.3.0
 Flask==0.12.2
 Flask-Compress==1.4.0
-Flask-Cors==3.0.4
+Flask-Cors==3.0.9
 gunicorn==19.8.1
 idna==2.6
 ipython-genutils==0.2.0
